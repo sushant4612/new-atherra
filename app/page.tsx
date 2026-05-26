@@ -34,11 +34,10 @@ export default function Home() {
   return (
     <>
       {/* ==================== NAV ==================== */}
-      <nav className={`topnav${navScrolled ? ' scrolled' : ' dark-hero-nav'}`}>
+      <nav className={`topnav${navScrolled ? ' scrolled' : ''}`}>
         <div className="nav-inner">
           <a href="#" className="brand">
-            <span className="brand-mark">Mahadik <span className="amp">&amp;</span> Co.</span>
-            <span className="brand-sub">Management Consulting</span>
+            <span className="brand-mark">Mahadik <span className="amp">&amp;</span> Company</span>
           </a>
           <div className="nav-mid">
             <a href="#about">About</a>
@@ -47,7 +46,7 @@ export default function Home() {
             <a href="#approach">Approach</a>
             <a href="#contact">Contact</a>
           </div>
-          <a href="#contact" className="nav-cta"><span className="dot"></span>Engage Us</a>
+          <a href="#contact" className="nav-cta">Engage Us</a>
           <button className="hamburger" aria-label="Open menu" onClick={() => setMobileOpen(true)}>
             <span></span><span></span><span></span>
           </button>
@@ -56,7 +55,7 @@ export default function Home() {
 
       {/* ==================== MOBILE MENU ==================== */}
       <div className={`mobile-menu${mobileOpen ? ' open' : ''}`}>
-        <button className="mobile-close" onClick={() => setMobileOpen(false)}>✕</button>
+        <button className="mobile-close" onClick={() => setMobileOpen(false)}>Close</button>
         <a href="#about" onClick={() => setMobileOpen(false)}>About</a>
         <a href="#services" onClick={() => setMobileOpen(false)}>Services</a>
         <a href="#industries" onClick={() => setMobileOpen(false)}>Industries</a>
