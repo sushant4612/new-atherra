@@ -69,16 +69,14 @@ export default function Home() {
           mediaType="video"
           mediaSrc="/15381345_1920_1080_25fps.mp4"
           bgImageSrc="/Modern%20Minimalist%20Scene.png"
-          title="Where Conviction"
+          title="Isolate Truth."
           date="Strategic Advisory · Since 2018"
-          scrollToExpand="Scroll to explore"
           textBlend={false}
         >
           {/* Revealed after hero fully expands */}
           <div className="hero-expanded-content">
-            <div className="eyebrow" style={{ marginBottom: '32px' }}>Mahadik &amp; Company</div>
-            <p className="hero-desc" style={{ marginBottom: '40px', maxWidth: '600px' }}>
-              A premier management consulting firm guiding organisations across <strong>14 industries</strong> to unlock sustainable growth, operational excellence, and transformational impact.
+            <p className="hero-desc" style={{ marginBottom: '48px', maxWidth: '560px' }}>
+              When financial stress creates fog, we strip away the symptoms to identify the root cause, stabilize the core, and design a rational path back to solvency.
             </p>
             <div className="hero-foot-inline">
               <div className="hero-actions">
