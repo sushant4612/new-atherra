@@ -335,14 +335,13 @@ const ScrollExpandMedia = ({
                     <p
                       className='text-center'
                       style={{
-                        fontFamily: "'Instrument Serif', serif",
-                        fontSize: '18px',
-                        fontWeight: 400,
-                        fontStyle: 'italic',
-                        color: 'rgba(247,243,234,0.58)',
-                        maxWidth: '560px',
-                        lineHeight: '1.6',
-                        letterSpacing: '0.005em',
+                        fontFamily: "'Inter Tight', sans-serif",
+                        fontSize: '15.5px',
+                        fontWeight: 300,
+                        color: 'rgba(247,243,234,0.55)',
+                        maxWidth: '520px',
+                        lineHeight: '1.75',
+                        letterSpacing: '0.02em',
                       }}
                     >
                       {subtitle}
