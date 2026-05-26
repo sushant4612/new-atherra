@@ -18,6 +18,7 @@ interface ScrollExpandMediaProps {
   bgImageSrc: string;
   title?: string;
   date?: string;
+  subtitle?: string;
   scrollToExpand?: string;
   textBlend?: boolean;
   children?: ReactNode;
@@ -30,7 +31,7 @@ const ScrollExpandMedia = ({
   bgImageSrc,
   title,
   date,
-  scrollToExpand,
+  subtitle,
   textBlend,
   children,
 }: ScrollExpandMediaProps) => {
@@ -311,9 +312,12 @@ const ScrollExpandMedia = ({
                 </motion.h1>
               </div>
 
-              {/* Bottom-anchored date & scroll hint */}
-              {(date || scrollToExpand) && (
-                <div className='absolute bottom-10 left-0 right-0 flex flex-col items-center gap-2 z-10 transition-none'>
+              {/* Bottom-anchored date + subtitle */}
+              {(date || subtitle) && (
+                <div
+                  className='absolute bottom-10 left-0 right-0 flex flex-col items-center gap-3 z-10 transition-none px-6'
+                  style={{ opacity: Math.max(0, 1 - scrollProgress * 2.2) }}
+                >
                   {date && (
                     <p
                       className='text-xs tracking-[0.22em] uppercase'
@@ -327,31 +331,37 @@ const ScrollExpandMedia = ({
                       {date}
                     </p>
                   )}
-                  {scrollToExpand && (
+                  {subtitle && (
                     <p
-                      className='text-xs tracking-[0.18em] uppercase'
+                      className='text-center'
                       style={{
-                        transform: `translateX(${textTranslateX}vw)`,
-                        fontFamily: "'JetBrains Mono', monospace",
-                        color: 'rgba(247,243,234,0.45)',
-                        whiteSpace: 'nowrap',
+                        fontFamily: "'Instrument Serif', serif",
+                        fontSize: '18px',
+                        fontWeight: 400,
+                        fontStyle: 'italic',
+                        color: 'rgba(247,243,234,0.58)',
+                        maxWidth: '560px',
+                        lineHeight: '1.6',
+                        letterSpacing: '0.005em',
                       }}
                     >
-                      {scrollToExpand}
+                      {subtitle}
                     </p>
                   )}
                 </div>
               )}
             </div>
 
-            <motion.section
-              className='flex flex-col w-full px-8 py-10 md:px-16 lg:py-20'
-              initial={{ opacity: 0 }}
-              animate={{ opacity: showContent ? 1 : 0 }}
-              transition={{ duration: 0.7 }}
-            >
-              {children}
-            </motion.section>
+            {children && (
+              <motion.section
+                className='flex flex-col w-full px-8 py-10 md:px-16 lg:py-20'
+                initial={{ opacity: 0 }}
+                animate={{ opacity: showContent ? 1 : 0 }}
+                transition={{ duration: 0.7 }}
+              >
+                {children}
+              </motion.section>
+            )}
           </div>
         </div>
       </section>

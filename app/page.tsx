@@ -70,28 +70,9 @@ export default function Home() {
           mediaSrc="/15381345_1920_1080_25fps.mp4"
           bgImageSrc="/Modern%20Minimalist%20Scene.png"
           title="Isolate Truth."
-          date="Strategic Advisory · Since 2018"
+          subtitle="When financial stress creates fog, we strip away the symptoms to identify the root cause, stabilize the core, and design a rational path back to solvency."
           textBlend={false}
-        >
-          {/* Revealed after hero fully expands */}
-          <div className="hero-expanded-content">
-            <p className="hero-desc" style={{ marginBottom: '48px', maxWidth: '560px' }}>
-              When financial stress creates fog, we strip away the symptoms to identify the root cause, stabilize the core, and design a rational path back to solvency.
-            </p>
-            <div className="hero-foot-inline">
-              <div className="hero-actions">
-                <a href="#services" className="btn btn-dark">Explore Services <span className="arrow">↗</span></a>
-                <a href="#contact" className="btn btn-light">Schedule a Call <span className="arrow">↗</span></a>
-              </div>
-              <div className="hero-meta">
-                <div className="row"><span>Industries</span><b>14+</b></div>
-                <div className="row"><span>Capabilities</span><b>08</b></div>
-                <div className="row"><span>Signature Sprint</span><b>3 Weeks</b></div>
-                <div className="row"><span>Footprint</span><b>Global</b></div>
-              </div>
-            </div>
-          </div>
-        </ScrollExpandMedia>
+        />
       </div>
 
       {/* ==================== TICKER ==================== */}
