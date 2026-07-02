@@ -1,0 +1,26 @@
+<svg width="640" height="640" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- Outer compass arc -->
+  <path d="M 130 460 A 260 260 0 0 1 470 110" stroke="#7d2e4e" stroke-opacity="0.28" stroke-width="1.25" fill="none" />
+  <!-- Inner compass arc, opposite sweep -->
+  <path d="M 200 500 A 190 190 0 0 0 500 210" stroke="#7d2e4e" stroke-opacity="0.4" stroke-width="1.25" fill="none" />
+
+  <!-- Rotated case-file square -->
+  <rect x="0" y="0" width="92" height="92" transform="translate(120 130) rotate(18)" stroke="#9c4b6c" stroke-opacity="0.5" stroke-width="1.25" fill="none" />
+
+  <!-- Ascending trend line -->
+  <polyline points="150,470 262,392 356,330 452,206" stroke="#7d2e4e" stroke-opacity="0.55" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round" />
+  <circle cx="150" cy="470" r="3.5" fill="#7d2e4e" fill-opacity="0.5" />
+  <circle cx="262" cy="392" r="3.5" fill="#7d2e4e" fill-opacity="0.5" />
+  <circle cx="356" cy="330" r="3.5" fill="#7d2e4e" fill-opacity="0.5" />
+  <circle cx="452" cy="206" r="6" fill="#a8802f" fill-opacity="0.85" />
+  <circle cx="452" cy="206" r="11" stroke="#a8802f" stroke-opacity="0.4" stroke-width="1" fill="none" />
+
+  <!-- Fine index ticks along the outer arc -->
+  <circle cx="470" cy="110" r="2" fill="#7d2e4e" fill-opacity="0.35" />
+  <circle cx="130" cy="460" r="2" fill="#7d2e4e" fill-opacity="0.35" />
+
+  <!-- Scattered data points for texture -->
+  <circle cx="540" cy="360" r="2" fill="#7d2e4e" fill-opacity="0.25" />
+  <circle cx="500" cy="440" r="2" fill="#7d2e4e" fill-opacity="0.2" />
+  <circle cx="90" cy="330" r="2" fill="#7d2e4e" fill-opacity="0.2" />
+</svg>

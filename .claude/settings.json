@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e ' *)",
+      "Bash(grep -iE \"^\\(graduation-cap|landmark|utensils|heart-pulse|users|gem|factory|briefcase|building-2|home|shopping-cart|cpu|plane|rocket|book-open|scale|trending-up|target|repeat|wrench|line-chart|shield|leaf|globe|arrow-up-right|arrow-right|chevron-down|menu|x|mail|check\\)\\\\.js$\")",
+      "Bash(xargs -I{} sh -c 'echo \"== {} ==\"; grep -oE \"export \\(declare \\)?\\(const|function\\) [A-Za-z_0-9]+\" {} 2>/dev/null | head -5')",
+      "Bash(npm root *)",
+      "Bash(find / -maxdepth 6 -iname \"playwright\" -type d)",
+      "Bash(npx --yes -p playwright -c \"node -e \\\\\"console.log\\(require.resolve\\('playwright'\\)\\)\\\\\"\")",
+      "Bash(kill 74970 74981 74969 8026 8025)",
+      "Bash(lsof -nP -iTCP:3000,3001 -sTCP:LISTEN)",
+      "Skill(run)",
+      "Skill(run:*)",
+      "Bash(chromium-cli --help)",
+      "Bash(python3 -c \"import playwright; print\\('py playwright ok'\\)\")",
+      "Bash(npx --no-install playwright --version)",
+      "Bash(npx --no-install playwright install chromium)",
+      "Bash(node --experimental-vm-modules /private/tmp/claude-501/-Users-sushantpathare-Projects-atherra-revamp/e022c2e2-2a81-4445-8827-55f3beece62d/scratchpad/nav-screenshot.mjs)",
+      "Bash(node -e \"require.resolve\\('playwright'\\)\")",
+      "Bash(npm ls *)",
+      "Bash(npx -y -p playwright node nav-screenshot.mjs)",
+      "Bash(node nav-screenshot.mjs)",
+      "Bash(lsof -nP -iTCP -sTCP:LISTEN)",
+      "Bash(curl -s http://localhost:3000/)",
+      "Bash(curl -s \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__13wb~1n._.css\")",
+      "Bash(curl -s \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__13wb~1n._.css\" -o /tmp/current.css)",
+      "Bash(curl -sI \"http://localhost:3000/_next/static/chunks/%5Broot-of-the-server%5D__13wb~1n._.css\")",
+      "Bash(kill 86660 86661)",
+      "Bash(curl -sf http://localhost:3000 -o /dev/null)",
+      "Bash(node gaps-hero-check.mjs)",
+      "Bash(node debug-mobile.mjs)",
+      "Bash(node values-mobile2.mjs)",
+      "Bash(git log *)"
+    ]
+  }
+}

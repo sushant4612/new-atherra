@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mahadik & Company — Management Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --ink: #0D0D0D;
+  --ivory: #F5F0E8;
+  --gold: #C9A84C;
+  --gold-light: #E8D5A0;
+  --warm-grey: #8A8277;
+  --mid-grey: #3D3A35;
+  --rule: rgba(201,168,76,0.25);
+  --surface: #F9F6F0;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed;
+  width: 8px; height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease, background 0.3s ease;
+  mix-blend-mode: multiply;
+}
+.cursor-ring {
+  position: fixed;
+  width: 36px; height: 36px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.12s ease, width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+  opacity: 0.5;
+}
+body:hover .cursor { opacity: 1; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--ivory); }
+::-webkit-scrollbar-thumb { background: var(--gold); }
+
+/* ======= NAVIGATION ======= */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 60px;
+  transition: background 0.4s ease, padding 0.4s ease, backdrop-filter 0.4s ease;
+}
+nav.scrolled {
+  background: rgba(245,240,232,0.92);
+  backdrop-filter: blur(16px);
+  padding: 16px 60px;
+  border-bottom: 1px solid var(--rule);
+}
+.nav-logo {
+  display: flex; flex-direction: column; gap: 2px;
+  text-decoration: none;
+}
+.nav-logo-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--ink);
+  text-transform: uppercase;
+}
+.nav-logo-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex; align-items: center; gap: 40px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mid-grey);
+  text-decoration: none;
+  position: relative;
+  transition: color 0.3s;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute; bottom: -4px; left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+.nav-cta {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ivory);
+  background: var(--ink);
+  border: none;
+  padding: 12px 28px;
+  cursor: none;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s;
+}
+.nav-cta:hover { background: var(--gold); }
+
+/* HAMBURGER */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: none;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.hamburger span {
+  display: block;
+  width: 24px; height: 1px;
+  background: var(--ink);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* ======= HERO ======= */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 60px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 80% 20%, rgba(201,168,76,0.07) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 60% at 10% 80%, rgba(201,168,76,0.05) 0%, transparent 50%);
+}
+
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--rule) 1px, transparent 1px),
+    linear-gradient(90deg, var(--rule) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 100% 100% at 50% 50%, black 30%, transparent 80%);
+  opacity: 0.6;
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.3s forwards;
+  display: flex; align-items: center; gap: 16px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 40px; height: 1px;
+  background: var(--gold);
+}
+
+.hero-headline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(60px, 8vw, 120px);
+  font-weight: 300;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  max-width: 900px;
+  opacity: 0;
+  animation: fadeUp 1.2s ease 0.5s forwards;
+}
+.hero-headline em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 60px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.8s forwards;
+}
+.hero-desc {
+  max-width: 380px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--warm-grey);
+  font-weight: 300;
+}
+.hero-actions {
+  display: flex; gap: 20px; align-items: center;
+}
+.btn-primary {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ivory);
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  padding: 16px 36px;
+  text-decoration: none;
+  cursor: none;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--gold); border-color: var(--gold); }
+.btn-ghost {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid rgba(13,13,13,0.3);
+  padding: 16px 36px;
+  text-decoration: none;
+  cursor: none;
+  transition: border-color 0.3s, color 0.3s;
+  display: inline-block;
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+.hero-scroll {
+  position: absolute;
+  right: 60px;
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--warm-grey);
+  text-transform: uppercase;
+  display: flex; align-items: center; gap: 12px;
+  opacity: 0;
+  animation: fadeIn 1s ease 1.2s forwards;
+}
+.hero-scroll::after {
+  content: '';
+  display: block;
+  width: 1px; height: 60px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0%,100% { opacity: 0.3; height: 60px; }
+  50% { opacity: 1; height: 80px; }
+}
+
+/* ======= STATS BAR ======= */
+.stats-bar {
+  background: var(--ink);
+  padding: 40px 60px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  position: relative;
+  overflow: hidden;
+}
+.stats-bar::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+.stat-item {
+  padding: 20px 40px;
+  border-right: 1px solid rgba(201,168,76,0.15);
+  text-align: center;
+}
+.stat-item:last-child { border-right: none; }
+.stat-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  display: block;
+}
+.stat-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: rgba(245,240,232,0.4);
+  text-transform: uppercase;
+  margin-top: 8px;
+  display: block;
+}
+
+/* ======= SECTION GLOBALS ======= */
+section { padding: 120px 60px; }
+
+.section-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 24px;
+}
+.section-tag::before {
+  content: '';
+  display: block; width: 28px; height: 1px;
+  background: var(--gold);
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+}
+.section-title em { font-style: italic; color: var(--gold); }
+
+/* ======= ABOUT ======= */
+.about {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+.about-left { }
+.about-right { }
+.about-body {
+  margin-top: 40px;
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--warm-grey);
+  max-width: 480px;
+}
+.about-body p + p { margin-top: 20px; }
+.about-body strong { color: var(--ink); font-weight: 500; }
+
+.about-values {
+  margin-top: 48px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  border: 1px solid var(--rule);
+}
+.about-value {
+  padding: 24px 28px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.about-value:nth-child(2n) { border-right: none; }
+.about-value:nth-child(n+3) { border-bottom: none; }
+.value-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.value-text {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--warm-grey);
+}
+
+.about-portrait {
+  position: relative;
+  height: 580px;
+}
+.portrait-frame {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #E8E0D0 0%, #D4C9B0 100%);
+  overflow: hidden;
+}
+.portrait-inner {
+  position: absolute;
+  inset: 20px;
+  background: linear-gradient(160deg, rgba(201,168,76,0.12) 0%, transparent 60%);
+  border: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 16px;
+}
+.portrait-monogram {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 100px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  opacity: 0.6;
+}
+.portrait-tagline {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--warm-grey);
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 40px;
+  line-height: 2;
+}
+
+.portrait-accent {
+  position: absolute;
+  bottom: -20px; right: -20px;
+  width: 120px; height: 120px;
+  border: 1px solid var(--gold);
+  opacity: 0.4;
+}
+
+/* ======= SERVICES ======= */
+.services-section {
+  background: var(--ink);
+  color: var(--ivory);
+  position: relative;
+  overflow: hidden;
+}
+.services-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+}
+.services-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 80px;
+}
+.services-header .section-title { color: var(--ivory); }
+.services-intro {
+  max-width: 360px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(245,240,232,0.45);
+}
+
+/* SIGNATURE CARD */
+.signature-service {
+  background: linear-gradient(135deg, rgba(201,168,76,0.12) 0%, rgba(201,168,76,0.04) 100%);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 48px;
+  margin-bottom: 2px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 48px;
+  cursor: none;
+  transition: background 0.4s;
+  position: relative;
+  overflow: hidden;
+}
+.signature-service::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--gold);
+}
+.signature-service:hover {
+  background: linear-gradient(135deg, rgba(201,168,76,0.18) 0%, rgba(201,168,76,0.08) 100%);
+}
+.sig-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 6px 14px;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+.sig-content { }
+.sig-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 400;
+  color: var(--ivory);
+  margin-bottom: 12px;
+}
+.sig-desc {
+  font-size: 13px;
+  line-height: 1.75;
+  color: rgba(245,240,232,0.5);
+  max-width: 600px;
+}
+.sig-meta {
+  text-align: right;
+  flex-shrink: 0;
+}
+.sig-duration {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  color: var(--gold);
+  line-height: 1;
+  display: block;
+}
+.sig-duration-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: rgba(201,168,76,0.5);
+  text-transform: uppercase;
+}
+
+/* SERVICE GRID */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 2px;
+}
+.service-card {
+  background: rgba(245,240,232,0.03);
+  border: 1px solid rgba(245,240,232,0.06);
+  padding: 40px 36px;
+  cursor: none;
+  transition: background 0.3s, border-color 0.3s;
+  position: relative;
+  overflow: hidden;
+  group: true;
+}
+.service-card:hover {
+  background: rgba(201,168,76,0.05);
+  border-color: rgba(201,168,76,0.2);
+}
+.service-card:hover .service-arrow { transform: translate(4px, -4px); }
+.service-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: rgba(201,168,76,0.4);
+  margin-bottom: 32px;
+  display: block;
+}
+.service-icon {
+  width: 40px; height: 40px;
+  margin-bottom: 24px;
+  display: flex; align-items: center; justify-content: center;
+}
+.service-icon svg { width: 28px; height: 28px; stroke: var(--gold); stroke-width: 1; fill: none; }
+.service-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--ivory);
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.service-desc {
+  font-size: 12px;
+  line-height: 1.75;
+  color: rgba(245,240,232,0.4);
+}
+.service-arrow {
+  position: absolute;
+  bottom: 32px; right: 32px;
+  font-size: 18px;
+  color: var(--gold);
+  transition: transform 0.3s ease;
+  opacity: 0.5;
+}
+
+/* ======= INDUSTRIES ======= */
+.industries-section { }
+.industries-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: end;
+  margin-bottom: 80px;
+}
+.industries-body {
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--warm-grey);
+  align-self: flex-end;
+}
+
+.industries-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  border: 1px solid var(--rule);
+}
+.industry-card {
+  padding: 32px 20px;
+  text-align: center;
+  border-right: 1px solid var(--rule);
+  cursor: none;
+  transition: background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.industry-card:hover { background: rgba(201,168,76,0.05); }
+.industry-card:hover .industry-name { color: var(--gold); }
+.industry-card:last-child { border-right: none; }
+.industry-icon-wrap {
+  width: 44px; height: 44px;
+  margin: 0 auto 16px;
+  border: 1px solid var(--rule);
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.3s;
+}
+.industry-card:hover .industry-icon-wrap { border-color: var(--gold); }
+.industry-icon-wrap svg { width: 20px; height: 20px; stroke: var(--warm-grey); stroke-width: 1.2; fill: none; }
+.industry-card:hover .industry-icon-wrap svg { stroke: var(--gold); }
+.industry-name {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--mid-grey);
+  text-transform: uppercase;
+  line-height: 1.6;
+  transition: color 0.3s;
+}
+
+/* Second row of industries */
+.industries-row2 {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  border: 1px solid var(--rule);
+  border-top: none;
+}
+
+/* ======= APPROACH ======= */
+.approach-section {
+  background: var(--surface);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.approach-inner {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 100px;
+}
+.approach-left { }
+.approach-steps {
+  counter-reset: step;
+  margin-top: 48px;
+}
+.approach-step {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 40px;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+  cursor: none;
+  transition: background 0.3s;
+}
+.approach-step:first-child { padding-top: 0; }
+.approach-step:last-child { border-bottom: none; }
+.step-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px;
+  font-weight: 300;
+  color: var(--gold);
+  opacity: 0.3;
+  line-height: 0.9;
+  transition: opacity 0.3s;
+}
+.approach-step:hover .step-num { opacity: 0.7; }
+.step-content { }
+.step-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: 12px;
+  line-height: 1.1;
+}
+.step-desc {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--warm-grey);
+}
+.step-tag {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 4px 10px;
+  text-transform: uppercase;
+  margin-top: 14px;
+}
+
+/* ======= TESTIMONIALS ======= */
+.testimonials-section {
+  background: var(--ink);
+  color: var(--ivory);
+  position: relative;
+  overflow: hidden;
+}
+.testi-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+.testi-header .section-title { color: var(--ivory); }
+.testi-header .section-tag { justify-content: center; }
+.testi-header .section-tag::before { display: none; }
+
+.testi-track-outer {
+  overflow: hidden;
+  position: relative;
+}
+.testi-track-outer::before,
+.testi-track-outer::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+.testi-track-outer::before {
+  left: 0;
+  background: linear-gradient(to right, var(--ink), transparent);
+}
+.testi-track-outer::after {
+  right: 0;
+  background: linear-gradient(to left, var(--ink), transparent);
+}
+
+.testi-track {
+  display: flex; gap: 24px;
+  animation: scrollTestis 40s linear infinite;
+  width: max-content;
+}
+.testi-track:hover { animation-play-state: paused; }
+@keyframes scrollTestis {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.testi-card {
+  width: 420px;
+  flex-shrink: 0;
+  border: 1px solid rgba(245,240,232,0.08);
+  background: rgba(245,240,232,0.03);
+  padding: 40px 36px;
+  position: relative;
+}
+.testi-quote-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 80px;
+  line-height: 0.5;
+  color: var(--gold);
+  opacity: 0.3;
+  margin-bottom: 24px;
+  display: block;
+}
+.testi-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(245,240,232,0.8);
+  font-weight: 300;
+  font-style: italic;
+  margin-bottom: 28px;
+}
+.testi-author {
+  display: flex; align-items: center; gap: 16px;
+  border-top: 1px solid rgba(245,240,232,0.08);
+  padding-top: 20px;
+}
+.author-avatar {
+  width: 40px; height: 40px;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.avatar-init {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  color: var(--gold);
+  font-weight: 400;
+}
+.author-info { }
+.author-name {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ivory);
+}
+.author-role {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: rgba(245,240,232,0.3);
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+.testi-industry {
+  position: absolute;
+  top: 20px; right: 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 0.2em;
+  color: rgba(201,168,76,0.5);
+  text-transform: uppercase;
+  border: 1px solid rgba(201,168,76,0.15);
+  padding: 4px 8px;
+}
+
+/* ======= CONTACT ======= */
+.contact-section {
+  padding: 160px 60px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: start;
+}
+.contact-left { }
+.contact-left .section-title { margin-bottom: 32px; }
+.contact-desc {
+  font-size: 14px;
+  line-height: 1.85;
+  color: var(--warm-grey);
+  margin-bottom: 48px;
+}
+.contact-details { display: flex; flex-direction: column; gap: 24px; }
+.contact-detail { display: flex; flex-direction: column; gap: 4px; }
+.cd-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.cd-value {
+  font-size: 14px;
+  color: var(--ink);
+}
+.cd-value a {
+  color: var(--ink);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.cd-value a:hover { color: var(--gold); }
+
+.contact-form { }
+.form-row { margin-bottom: 24px; }
+.form-label {
+  display: block;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--warm-grey);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(13,13,13,0.2);
+  padding: 12px 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.3s;
+  cursor: none;
+  appearance: none;
+}
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus { border-color: var(--gold); }
+.form-textarea { resize: none; height: 80px; }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.form-submit {
+  width: 100%;
+  background: var(--ink);
+  color: var(--ivory);
+  border: none;
+  padding: 18px;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: background 0.3s;
+  margin-top: 16px;
+}
+.form-submit:hover { background: var(--gold); }
+.form-note {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: rgba(138,130,119,0.6);
+  margin-top: 16px;
+  display: block;
+}
+
+/* ======= FOOTER ======= */
+footer {
+  background: var(--ink);
+  color: var(--ivory);
+  padding: 80px 60px 40px;
+  border-top: 1px solid rgba(201,168,76,0.2);
+}
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 60px;
+  border-bottom: 1px solid rgba(245,240,232,0.08);
+}
+.footer-brand { }
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--ivory);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  display: block;
+}
+.footer-logo-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 20px;
+}
+.footer-brand-desc {
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(245,240,232,0.35);
+  max-width: 280px;
+}
+.footer-col-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-links a {
+  font-size: 12px;
+  color: rgba(245,240,232,0.4);
+  text-decoration: none;
+  transition: color 0.3s;
+  font-weight: 300;
+}
+.footer-links a:hover { color: var(--gold); }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 36px;
+}
+.footer-copy {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.15em;
+  color: rgba(245,240,232,0.25);
+  text-transform: uppercase;
+}
+.footer-gold-line {
+  width: 100%; height: 1px;
+  background: linear-gradient(to right, var(--gold), transparent);
+  margin-bottom: 40px;
+  opacity: 0.4;
+}
+
+/* ======= ANIMATIONS ======= */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* MOBILE NAV */
+.mobile-menu {
+  display: none;
+  position: fixed; inset: 0;
+  background: var(--ink);
+  z-index: 99;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 300;
+  color: var(--ivory);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  transition: color 0.3s;
+}
+.mobile-menu a:hover { color: var(--gold); }
+.mobile-close {
+  position: absolute; top: 24px; right: 60px;
+  background: none; border: none;
+  color: var(--ivory);
+  font-size: 32px;
+  cursor: none;
+}
+
+/* ============= RESPONSIVE ============= */
+@media (max-width: 1100px) {
+  nav { padding: 20px 30px; }
+  nav.scrolled { padding: 14px 30px; }
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+
+  .hero { padding: 0 30px 60px; }
+  .hero-scroll { display: none; }
+  section { padding: 80px 30px; }
+
+  .about { grid-template-columns: 1fr; gap: 60px; }
+  .about-portrait { height: 360px; }
+
+  .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 30px; }
+  .stat-item:nth-child(2) { border-right: none; }
+
+  .services-header { flex-direction: column; gap: 24px; align-items: flex-start; }
+  .signature-service { grid-template-columns: 1fr; }
+  .sig-badge { writing-mode: horizontal-tb; transform: none; width: fit-content; }
+  .sig-meta { text-align: left; }
+
+  .services-grid { grid-template-columns: 1fr 1fr; }
+
+  .industries-header { grid-template-columns: 1fr; gap: 24px; }
+  .industries-grid { grid-template-columns: repeat(4, 1fr); }
+  .industries-row2 { grid-template-columns: repeat(4, 1fr); }
+  .industry-card { border-bottom: 1px solid var(--rule); }
+
+  .approach-inner { grid-template-columns: 1fr; gap: 48px; }
+
+  .contact-section { grid-template-columns: 1fr; gap: 60px; padding: 80px 30px; }
+
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+
+  .testi-card { width: 320px; }
+}
+
+@media (max-width: 640px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .industries-grid { grid-template-columns: repeat(2, 1fr); }
+  .industries-row2 { grid-template-columns: repeat(2, 1fr); }
+  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 32px; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .about-values { grid-template-columns: 1fr; }
+  .about-value { border-right: none !important; }
+  .form-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .stats-bar { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-name">Mahadik & Company</span>
+    <span class="nav-logo-sub">Management Consulting</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#approach">Approach</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Engage Us</a>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" id="mobileClose">✕</button>
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#industries" onclick="closeMobile()">Industries</a>
+  <a href="#approach" onclick="closeMobile()">Approach</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
+</div>
+
+<!-- ======= HERO ======= -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-eyebrow">Strategic Advisory Since 2018</div>
+  <h1 class="hero-headline">
+    Where Strategy<br>
+    Meets <em>Conviction</em>
+  </h1>
+  <div class="hero-bottom">
+    <p class="hero-desc">
+      Mahadik & Company is a premier management consulting firm guiding organisations across 14 industries to unlock sustainable growth, operational excellence, and transformational impact.
+    </p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-primary">Explore Services</a>
+      <a href="#contact" class="btn-ghost">Schedule a Call</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scroll to explore</div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-number">14+</span>
+    <span class="stat-label">Industries Served</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">8</span>
+    <span class="stat-label">Core Capabilities</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">3wk</span>
+    <span class="stat-label">PMF Advisory Sprint</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-number">360°</span>
+    <span class="stat-label">Business Transformation</span>
+  </div>
+</div>
+
+<!-- ======= ABOUT ======= -->
+<section id="about">
+  <div class="about">
+    <div class="about-left reveal">
+      <div class="section-tag">Our Philosophy</div>
+      <h2 class="section-title">Clarity Before<br><em>Counsel</em></h2>
+      <div class="about-body">
+        <p>Mahadik & Company was founded on a singular conviction: that the most powerful strategic advice is ruthlessly clear, evidence-driven, and built around your organisation's unique context — not generic frameworks.</p>
+        <p>We don't believe in lengthy engagements that produce reports no one implements. We believe in <strong>focused advisory relationships</strong> that produce transformational results, measurable outcomes, and lasting capability within your team.</p>
+        <p>From startups finding product-market fit to enterprises navigating industry disruption, our firm brings the same rigour, candour, and depth to every mandate.</p>
+      </div>
+      <div class="about-values">
+        <div class="about-value">
+          <div class="value-label">Rigour</div>
+          <div class="value-text">Every recommendation is grounded in data, first-principles thinking, and deep sector knowledge.</div>
+        </div>
+        <div class="about-value">
+          <div class="value-label">Candour</div>
+          <div class="value-text">We tell our clients what they need to hear — not what they want to hear.</div>
+        </div>
+        <div class="about-value">
+          <div class="value-label">Ownership</div>
+          <div class="value-text">We work alongside you, not at arm's length. Your success is our accountability.</div>
+        </div>
+        <div class="about-value">
+          <div class="value-label">Impact</div>
+          <div class="value-text">We measure our worth by the results we deliver — not the slides we produce.</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-right reveal reveal-delay-2">
+      <div class="about-portrait">
+        <div class="portrait-frame">
+          <div class="portrait-inner">
+            <div class="portrait-monogram">M&C</div>
+            <div class="portrait-tagline">
+              Trusted by Leaders<br>
+              Across 14 Industries<br>
+              ——————
+            </div>
+          </div>
+        </div>
+        <div class="portrait-accent"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= SERVICES ======= -->
+<section class="services-section" id="services">
+  <div class="services-header reveal">
+    <div>
+      <div class="section-tag" style="color:rgba(201,168,76,0.7)">What We Do</div>
+      <h2 class="section-title" style="color:var(--ivory)">Our<br><em>Capabilities</em></h2>
+    </div>
+    <p class="services-intro">Eight specialised service lines, each designed to address a distinct dimension of business performance. Used together, they deliver comprehensive transformation.</p>
+  </div>
+
+  <!-- SIGNATURE -->
+  <div class="signature-service reveal">
+    <div class="sig-badge">Signature Offering</div>
+    <div class="sig-content">
+      <h3 class="sig-title">PMF Advisory</h3>
+      <p class="sig-desc">Our signature offering. Find and fix the gap between your product and its market. We conduct rapid, structured product-market fit diagnostics and build a concrete action plan to close the gap — so your product doesn't just exist, it resonates. Designed for founders, product leaders, and business owners who are ready to stop guessing.</p>
+    </div>
+    <div class="sig-meta">
+      <span class="sig-duration">3</span>
+      <span class="sig-duration-label">Week Sprint</span>
+    </div>
+  </div>
+
+  <!-- GRID -->
+  <div class="services-grid">
+    <div class="service-card reveal">
+      <span class="service-num">01</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3 class="service-name">Business Strategy &amp; Transformation</h3>
+      <p class="service-desc">Redefine your business model and strategic direction with transformation roadmaps that deliver sustainable competitive advantage.</p>
+      <span class="service-arrow">↗</span>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-num">02</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12"/></svg>
+      </div>
+      <h3 class="service-name">Customer &amp; Market Excellence</h3>
+      <p class="service-desc">Build deeper customer relationships and discover untapped market opportunities before the competition does.</p>
+      <span class="service-arrow">↗</span>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-num">03</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h3 class="service-name">Operations &amp; Performance Improvement</h3>
+      <p class="service-desc">Streamline operational workflows and implement continuous improvement frameworks that actually last.</p>
+      <span class="service-arrow">↗</span>
+    </div>
+    <div class="service-card reveal">
+      <span class="service-num">04</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3 class="service-name">Organisation &amp; People</h3>
+      <p class="service-desc">Develop organisational structures and cultures that drive innovation, retention, and excellence at scale.</p>
+      <span class="service-arrow">↗</span>
+    </div>
+    <div class="service-card reveal reveal-delay-1">
+      <span class="service-num">05</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      </div>
+      <h3 class="service-name">Financial Advisory &amp; Value Creation</h3>
+      <p class="service-desc">Optimise your financial strategy and capital allocation to maximise business value at every stage of growth.</p>
+      <span class="service-arrow">↗</span>
+    </div>
+    <div class="service-card reveal reveal-delay-2">
+      <span class="service-num">06</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <h3 class="service-name">Digital, Data &amp; Technology</h3>
+      <p class="service-desc">Harness technology and data analytics to drive digital transformation that your business actually adopts and uses.</p>
+      <span class="service-arrow">↗</span>
+    </div>
+    <div class="service-card reveal" style="grid-column: span 1;">
+      <span class="service-num">07</span>
+      <div class="service-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h3 class="service-name">Sustainability, Risk &amp; Impact</h3>
+      <p class="service-desc">Build resilient strategies and responsible practices that manage risk while delivering measurable positive impact.</p>
+      <span class="service-arrow">↗</span>
+    </div>
+  </div>
+</section>
+
+<!-- ======= INDUSTRIES ======= -->
+<section id="industries">
+  <div class="industries-header reveal">
+    <div>
+      <div class="section-tag">Coverage</div>
+      <h2 class="section-title">Industries<br>We <em>Serve</em></h2>
+    </div>
+    <p class="industries-body">Our partners carry deep domain knowledge across 14 sectors — so you always work with an advisor who understands the specific dynamics, regulatory environment, and competitive pressures of your industry.</p>
+  </div>
+
+  <div class="industries-grid reveal">
+    <div class="industry-card">
+      <div class="industry-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+      </div>
+      <div class="industry-name">Education &amp; E-Learning</div>
+    </div>
+    <div class="industry-card">
+      <div class="industry-icon-wrap">
+        <svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      </div>
+      <div class="industry-name">Financial Services</div>
+    </div>
+    <div class="industry-card">
+      <div class="industry-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+      </div>
+      <div class="industry-name">Food &amp; Beverage</div>
+    </div>
+    <div class="industry-card">
+      <div class="industry-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      </div>
+      <div class="industry-name">Healthcare &amp; Wellness</div>
+    </div>
+    <div class="industry-card">
+      <div class="industry-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <div class="industry-name">Individual &amp; Family Services</div>
+    </div>
+    <div class="industry-card">
+      <div class="industry-icon-wrap">
+        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      </div>
+      <div class="industry-name">Luxury &amp; Premium Retail</div>
+    </div>
+    <div class="industry-card" style="border-right:none;">
+      <div class="industry-icon-wrap">
+        <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+      </div>
+      <div class="industry-name">Manufacturing</div>
+    </div>
+  </div>
+
+  <div class="industries-row2 reveal">
+    <div class="industry-card">
+      <div class="industry-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+      </div>
+      <div class="industry-name">Professional Services</div>
+    </div>
+    <div class="industry-card">
+      <div class="industry-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="industry-name">Public Sector</div>
+    </div>
+    <div class="industry-card">
+      <div class="industry-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="industry-name">Real Estate &amp; Infrastructure</div>
+    </div>
+    <div class="industry-card">
+      <div class="industry-icon-wrap">
+        <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      </div>
+      <div class="industry-name">Retail &amp; FMCG</div>
+    </div>
+    <div class="industry-card">
+      <div class="industry-icon-wrap">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <div class="industry-name">Technology</div>
+    </div>
+    <div class="industry-card">
+      <div class="industry-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+      </div>
+      <div class="industry-name">Tourism &amp; Hospitality</div>
+    </div>
+    <div class="industry-card" style="border-right:none;">
+      <div class="industry-icon-wrap">
+        <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+      </div>
+      <div class="industry-name">Startups</div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= APPROACH ======= -->
+<section class="approach-section" id="approach">
+  <div class="approach-inner">
+    <div class="approach-left">
+      <div class="section-tag">The Method</div>
+      <h2 class="section-title">How We<br><em>Work</em></h2>
+      <p style="margin-top:32px; font-size:14px; line-height:1.85; color:var(--warm-grey); max-width:320px;">
+        Every engagement follows a disciplined process designed to surface the real problem, not the presenting one — and deliver results you can build on.
+      </p>
+    </div>
+    <div class="approach-steps">
+      <div class="approach-step reveal">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3 class="step-title">Deep Discovery</h3>
+          <p class="step-desc">We invest time understanding your business, market, team, and the outcomes you actually need — before proposing anything. No templates. No pre-packaged answers.</p>
+          <span class="step-tag">2–3 Days</span>
+        </div>
+      </div>
+      <div class="approach-step reveal reveal-delay-1">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3 class="step-title">Structured Diagnosis</h3>
+          <p class="step-desc">We analyse data, interview stakeholders, map competitive dynamics, and pressure-test assumptions. The diagnosis drives everything that follows.</p>
+          <span class="step-tag">1–2 Weeks</span>
+        </div>
+      </div>
+      <div class="approach-step reveal reveal-delay-2">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3 class="step-title">Strategic Architecture</h3>
+          <p class="step-desc">We design the strategic response — whether it's a transformation roadmap, financial model, operating model redesign, or market entry strategy.</p>
+          <span class="step-tag">Engagement Specific</span>
+        </div>
+      </div>
+      <div class="approach-step reveal reveal-delay-3">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <h3 class="step-title">Activation &amp; Capability Transfer</h3>
+          <p class="step-desc">Strategy without execution is a document. We work alongside your team through implementation and ensure the capability to continue without us.</p>
+          <span class="step-tag">Ongoing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= TESTIMONIALS ======= -->
+<section class="testimonials-section">
+  <div class="testi-header reveal">
+    <div class="section-tag">Client Voices</div>
+    <h2 class="section-title" style="color:var(--ivory)">What Our<br><em>Clients</em> Say</h2>
+  </div>
+
+  <div class="testi-track-outer">
+    <div class="testi-track" id="testiTrack">
+      <!-- CARD 1 -->
+      <div class="testi-card">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">Mahadik & Company transformed the way we think about our market. The PMF Advisory sprint gave us more clarity in 3 weeks than 18 months of internal debate had.</p>
+        <div class="testi-author">
+          <div class="author-avatar"><span class="avatar-init">R</span></div>
+          <div class="author-info">
+            <div class="author-name">Rajiv Mehta</div>
+            <div class="author-role">Founder & CEO, EdTech Platform</div>
+          </div>
+        </div>
+        <div class="testi-industry">Education</div>
+      </div>
+      <!-- CARD 2 -->
+      <div class="testi-card">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">The team's financial advisory work helped us restructure our capital allocation and identify ₹4Cr in operational savings within the first quarter. Exceptional work.</p>
+        <div class="testi-author">
+          <div class="author-avatar"><span class="avatar-init">P</span></div>
+          <div class="author-info">
+            <div class="author-name">Priya Sharma</div>
+            <div class="author-role">CFO, Mid-Market NBFC</div>
+          </div>
+        </div>
+        <div class="testi-industry">Financial Services</div>
+      </div>
+      <!-- CARD 3 -->
+      <div class="testi-card">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">What differentiates M&C is their candour. They told us our growth thesis was flawed — and then helped us build a better one. That honesty is rare and invaluable.</p>
+        <div class="testi-author">
+          <div class="author-avatar"><span class="avatar-init">A</span></div>
+          <div class="author-info">
+            <div class="author-name">Anand Krishnan</div>
+            <div class="author-role">MD, Luxury Retail Group</div>
+          </div>
+        </div>
+        <div class="testi-industry">Luxury Retail</div>
+      </div>
+      <!-- CARD 4 -->
+      <div class="testi-card">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">Our operational transformation engagement delivered a 34% efficiency improvement and a redesigned delivery model our team actually owns. This is what good consulting looks like.</p>
+        <div class="testi-author">
+          <div class="author-avatar"><span class="avatar-init">S</span></div>
+          <div class="author-info">
+            <div class="author-name">Sunita Bose</div>
+            <div class="author-role">COO, Healthcare Network</div>
+          </div>
+        </div>
+        <div class="testi-industry">Healthcare</div>
+      </div>
+      <!-- CARD 5 -->
+      <div class="testi-card">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">M&C helped us navigate a complex public-sector bid and infrastructure project from strategic positioning through to execution planning. Deeply professional throughout.</p>
+        <div class="testi-author">
+          <div class="author-avatar"><span class="avatar-init">V</span></div>
+          <div class="author-info">
+            <div class="author-name">Vikram Nair</div>
+            <div class="author-role">Director, Infrastructure Firm</div>
+          </div>
+        </div>
+        <div class="testi-industry">Public Sector</div>
+      </div>
+      <!-- DUPLICATES for seamless scroll -->
+      <div class="testi-card">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">Mahadik & Company transformed the way we think about our market. The PMF Advisory sprint gave us more clarity in 3 weeks than 18 months of internal debate had.</p>
+        <div class="testi-author">
+          <div class="author-avatar"><span class="avatar-init">R</span></div>
+          <div class="author-info">
+            <div class="author-name">Rajiv Mehta</div>
+            <div class="author-role">Founder & CEO, EdTech Platform</div>
+          </div>
+        </div>
+        <div class="testi-industry">Education</div>
+      </div>
+      <div class="testi-card">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">The team's financial advisory work helped us restructure our capital allocation and identify ₹4Cr in operational savings within the first quarter. Exceptional work.</p>
+        <div class="testi-author">
+          <div class="author-avatar"><span class="avatar-init">P</span></div>
+          <div class="author-info">
+            <div class="author-name">Priya Sharma</div>
+            <div class="author-role">CFO, Mid-Market NBFC</div>
+          </div>
+        </div>
+        <div class="testi-industry">Financial Services</div>
+      </div>
+      <div class="testi-card">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">What differentiates M&C is their candour. They told us our growth thesis was flawed — and then helped us build a better one. That honesty is rare and invaluable.</p>
+        <div class="testi-author">
+          <div class="author-avatar"><span class="avatar-init">A</span></div>
+          <div class="author-info">
+            <div class="author-name">Anand Krishnan</div>
+            <div class="author-role">MD, Luxury Retail Group</div>
+          </div>
+        </div>
+        <div class="testi-industry">Luxury Retail</div>
+      </div>
+      <div class="testi-card">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">Our operational transformation engagement delivered a 34% efficiency improvement and a redesigned delivery model our team actually owns. This is what good consulting looks like.</p>
+        <div class="testi-author">
+          <div class="author-avatar"><span class="avatar-init">S</span></div>
+          <div class="author-info">
+            <div class="author-name">Sunita Bose</div>
+            <div class="author-role">COO, Healthcare Network</div>
+          </div>
+        </div>
+        <div class="testi-industry">Healthcare</div>
+      </div>
+      <div class="testi-card">
+        <span class="testi-quote-mark">"</span>
+        <p class="testi-text">M&C helped us navigate a complex public-sector bid and infrastructure project from strategic positioning through to execution planning. Deeply professional throughout.</p>
+        <div class="testi-author">
+          <div class="author-avatar"><span class="avatar-init">V</span></div>
+          <div class="author-info">
+            <div class="author-name">Vikram Nair</div>
+            <div class="author-role">Director, Infrastructure Firm</div>
+          </div>
+        </div>
+        <div class="testi-industry">Public Sector</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= CONTACT ======= -->
+<section class="contact-section" id="contact">
+  <div class="contact-left reveal">
+    <div class="section-tag">Get In Touch</div>
+    <h2 class="section-title">Begin the<br><em>Conversation</em></h2>
+    <p class="contact-desc">Every meaningful engagement starts with an honest conversation. Tell us about your organisation, your challenge, and what you're trying to achieve. No commitment required.</p>
+    <div class="contact-details">
+      <div class="contact-detail">
+        <span class="cd-label">Email</span>
+        <span class="cd-value"><a href="mailto:hello@mahadikandcompany.com">hello@mahadikandcompany.com</a></span>
+      </div>
+      <div class="contact-detail">
+        <span class="cd-label">Location</span>
+        <span class="cd-value">India — Serving clients globally</span>
+      </div>
+      <div class="contact-detail">
+        <span class="cd-label">Response Time</span>
+        <span class="cd-value">Within one business day</span>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form reveal reveal-delay-2">
+    <div class="form-grid">
+      <div class="form-row">
+        <label class="form-label">First Name</label>
+        <input type="text" class="form-input" placeholder="Your name">
+      </div>
+      <div class="form-row">
+        <label class="form-label">Organisation</label>
+        <input type="text" class="form-input" placeholder="Company name">
+      </div>
+    </div>
+    <div class="form-row">
+      <label class="form-label">Email Address</label>
+      <input type="email" class="form-input" placeholder="you@company.com">
+    </div>
+    <div class="form-row">
+      <label class="form-label">Service Interest</label>
+      <select class="form-select">
+        <option value="" disabled selected>Select a service</option>
+        <option>PMF Advisory (Signature)</option>
+        <option>Business Strategy & Transformation</option>
+        <option>Customer & Market Excellence</option>
+        <option>Operations & Performance Improvement</option>
+        <option>Organisation & People</option>
+        <option>Financial Advisory & Value Creation</option>
+        <option>Digital, Data & Technology</option>
+        <option>Sustainability, Risk & Impact</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label class="form-label">Your Challenge</label>
+      <textarea class="form-textarea" placeholder="Briefly describe what you're working on or struggling with..."></textarea>
+    </div>
+    <button class="form-submit" onclick="handleSubmit(this)">Send Enquiry →</button>
+    <span class="form-note">We respect your privacy. No spam, ever.</span>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-gold-line"></div>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <span class="footer-logo">Mahadik & Company</span>
+      <span class="footer-logo-sub">Management Consulting</span>
+      <p class="footer-brand-desc">A premier management consulting firm serving leaders across 14 industries with strategic clarity, operational rigour, and transformational impact.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">PMF Advisory</a></li>
+        <li><a href="#services">Business Strategy</a></li>
+        <li><a href="#services">Market Excellence</a></li>
+        <li><a href="#services">Operations</a></li>
+        <li><a href="#services">Organisation & People</a></li>
+        <li><a href="#services">Financial Advisory</a></li>
+        <li><a href="#services">Digital & Data</a></li>
+        <li><a href="#services">Sustainability & Risk</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#approach">Our Approach</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Connect</div>
+      <ul class="footer-links">
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="mailto:hello@mahadikandcompany.com">Email Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Mahadik & Company. All rights reserved.</span>
+    <span class="footer-copy" style="color:rgba(201,168,76,0.3)">Clarity. Conviction. Impact.</span>
+  </div>
+</footer>
+
+<script>
+// CURSOR
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx + 'px';
+  cursor.style.top = my + 'px';
+});
+
+function animateRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateRing);
+}
+animateRing();
+
+document.querySelectorAll('a, button, .service-card, .industry-card, .approach-step').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.width = '16px';
+    cursor.style.height = '16px';
+    ring.style.width = '56px';
+    ring.style.height = '56px';
+    ring.style.opacity = '0.8';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.width = '8px';
+    cursor.style.height = '8px';
+    ring.style.width = '36px';
+    ring.style.height = '36px';
+    ring.style.opacity = '0.5';
+  });
+});
+
+// NAV SCROLL
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// MOBILE MENU
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.add('open');
+});
+document.getElementById('mobileClose').addEventListener('click', () => {
+  document.getElementById('mobileMenu').classList.remove('open');
+});
+function closeMobile() {
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
+// REVEAL ON SCROLL
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(r => observer.observe(r));
+
+// SMOOTH ANCHOR SCROLL
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id === '#') return;
+    const el = document.querySelector(id);
+    if (el) {
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// FORM SUBMIT
+function handleSubmit(btn) {
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Enquiry Sent ✓';
+    btn.style.background = 'var(--gold)';
+  }, 1400);
+}
+
+// HERO PARALLAX (subtle)
+window.addEventListener('scroll', () => {
+  const hero = document.querySelector('.hero-headline');
+  const y = window.scrollY;
+  if (hero && y < window.innerHeight) {
+    hero.style.transform = `translateY(${y * 0.12}px)`;
+  }
+});
+</script>
+</body>
+</html>
