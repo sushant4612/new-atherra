@@ -30,7 +30,9 @@
       "Bash(node gaps-hero-check.mjs)",
       "Bash(node debug-mobile.mjs)",
       "Bash(node values-mobile2.mjs)",
-      "Bash(git log *)"
+      "Bash(git log *)",
+      "Bash(unzip -o \"Cinzel.zip\" -d /tmp/cinzel-extract)",
+      "Bash(curl -s \"http://localhost:3000/\")"
     ]
   }
 }

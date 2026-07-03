@@ -1,12 +1,12 @@
+import { BrandMark } from "@/components/ui/BrandMark";
+
 export function Footer() {
   return (
     <footer className="foot">
       <div className="wrap">
         <div className="foot-cols">
           <div className="foot-brand">
-            <span className="name">
-              Mahadik <span className="amp">&amp;</span> Company
-            </span>
+            <BrandMark dark />
             <span className="sub">Management Consulting</span>
             <p className="desc">
               A premier management consulting firm serving leaders across 14 industries with

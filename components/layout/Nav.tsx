@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { BrandMark } from "@/components/ui/BrandMark";
 import { MobileMenu } from "./MobileMenu";
 
 export const navLinks = [
@@ -56,9 +57,7 @@ export function Nav() {
       <div className="nav-shell">
         <div className="nav-inner">
           <a href="#" className="brand">
-            <span className="brand-mark">
-              Mahadik <span className="amp">&amp;</span> Company
-            </span>
+            <BrandMark />
           </a>
           <div className="nav-mid">
             {navLinks.map((link) => {

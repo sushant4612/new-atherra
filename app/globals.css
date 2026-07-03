@@ -53,13 +53,22 @@
 html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
 
 body {
-  background: var(--surface-0);
+  background-color: var(--surface-0);
+  background-image: url('/site-bg-texture.png');
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-blend-mode: multiply;
   color: var(--ink-900);
   font-family: 'Source Serif 4', Georgia, serif;
   font-weight: 400;
   font-size: 17px;
   line-height: 1.6;
   overflow-x: hidden;
+}
+@media (max-width: 900px) {
+  body { background-attachment: scroll; }
 }
 
 ::selection { background: var(--brand-600); color: #fff; }
@@ -195,15 +204,32 @@ nav.topnav.scrolled .nav-shell {
 nav.topnav.scrolled .nav-inner { padding: 14px 28px; }
 
 .brand { display: flex; align-items: center; text-decoration: none; color: var(--ink-900); }
-.brand-mark {
-  font-family: 'Libre Franklin', sans-serif;
-  font-size: 18px; line-height: 1;
-  letter-spacing: -0.01em;
-  font-weight: 700;
+
+.brand-lockup { display: inline-flex; align-items: center; gap: 14px; }
+.brand-icon {
+  display: block;
+  width: 34px; height: 34px;
+  border-radius: 3px;
+  object-fit: cover;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+nav.topnav.scrolled .brand-icon { width: 28px; height: 28px; }
+.brand-divider { width: 1px; height: 24px; background: var(--paper-100); }
+.brand-wordmark {
+  font-family: 'Cinzel', serif;
+  font-weight: 500;
+  font-size: 15.5px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--ink-900);
   transition: font-size 0.3s ease;
 }
-nav.topnav.scrolled .brand-mark { font-size: 16px; }
-.brand-mark .amp { color: var(--brand-600); font-style: italic; }
+nav.topnav.scrolled .brand-wordmark { font-size: 14px; }
+.brand-wordmark .amp { color: var(--brand-600); }
+
+.brand-lockup.dark .brand-divider { background: rgba(251,249,246,0.2); }
+.brand-lockup.dark .brand-wordmark { color: #fff; }
+.brand-lockup.dark .brand-wordmark .amp { color: var(--brand-500); }
 
 .nav-mid { display: flex; justify-content: center; gap: 36px; }
 .nav-mid a {
@@ -285,7 +311,7 @@ nav.topnav.scrolled .brand-mark { font-size: 16px; }
    ============================================================ */
 #hero {
   min-height: 100dvh;
-  background: var(--surface-0);
+  background: transparent;
   position: relative;
   overflow: hidden;
   display: flex;
@@ -318,12 +344,12 @@ nav.topnav.scrolled .brand-mark { font-size: 16px; }
 }
 .hero-motif {
   position: absolute;
-  top: 6%;
-  right: -4%;
-  width: min(46vw, 640px);
+  top: 8%;
+  right: 4%;
+  width: min(30vw, 480px);
   height: auto;
 }
-@media (max-width: 1100px) {
+@media (max-width: 1300px) {
   .hero-motif { display: none; }
 }
 .hero-inner {
@@ -746,9 +772,7 @@ section.block + section.block:not(.approach) { border-top: 1px solid var(--paper
    ============================================================ */
 footer.foot { background: var(--dark-900); color: rgba(251,249,246,0.9); padding: 72px 48px 32px; }
 .foot-cols { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 56px; padding-bottom: 48px; border-bottom: 1px solid var(--dark-border); }
-.foot-brand { display: flex; flex-direction: column; gap: 12px; }
-.foot-brand .name { font-family: 'Libre Franklin', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: -0.01em; color: #fff; }
-.foot-brand .name .amp { color: var(--brand-500); font-style: italic; }
+.foot-brand { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
 .foot-brand .sub { font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(251,249,246,0.4); }
 .foot-brand .desc { font-family: 'Source Serif 4', serif; font-size: 13.5px; line-height: 1.65; color: rgba(251,249,246,0.4); max-width: 300px; margin-top: 10px; }
 .foot-col-title { font-family: 'Fragment Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--brand-500); margin-bottom: 18px; }

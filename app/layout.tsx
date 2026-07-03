@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Libre_Franklin, Source_Serif_4, Fragment_Mono } from "next/font/google";
+import { Libre_Franklin, Source_Serif_4, Fragment_Mono, Cinzel } from "next/font/google";
 import "./globals.css";
 
 const libreFranklin = Libre_Franklin({
@@ -21,6 +21,13 @@ const fragmentMono = Fragment_Mono({
   weight: ["400"],
   subsets: ["latin"],
   variable: "--font-fragment-mono",
+  display: "swap",
+});
+
+const cinzel = Cinzel({
+  weight: ["500", "600"],
+  subsets: ["latin"],
+  variable: "--font-cinzel",
   display: "swap",
 });
 
@@ -72,7 +79,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${libreFranklin.variable} ${sourceSerif.variable} ${fragmentMono.variable}`}
+      className={`${libreFranklin.variable} ${sourceSerif.variable} ${fragmentMono.variable} ${cinzel.variable}`}
     >
       <body>
         <a href="#main-content" className="skip-link">
